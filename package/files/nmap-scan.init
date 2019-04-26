@@ -1,0 +1,22 @@
+#!/bin/sh /etc/rc.common
+START=99
+
+CONFIG=/bin/config
+start()
+{
+	enable=$(${CONFIG} get nmap_enable)
+	if [ ${enable} == 1 ] ;then
+		/usr/sbin/nmap-scan
+	fi
+}
+
+stop()
+{
+	killall nmap-scan
+}
+
+retart()
+{
+	stop
+	start
+}
